@@ -1,23 +1,28 @@
 package org.launchcode.techjobs.persistent.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Optional;
 
 @Entity
-public class Job{
+public class Job extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
+    // remove? private String name;
 
-    private String name;
+// replace the employer field with a reference to the employer type
 
-    private String employer;
-    private String skills;
+    // add @ManyToOne to employer
+    @ManyToOne
+    @NotNull
+    private Employer employer;
+    @ManyToMany
+    private List<Skill> skills;
 
     public Job() {
     }
 
-    public Job(String anEmployer, String someSkills) {
+    public Job(Employer anEmployer, List<Skill> someSkills) {
         super();
         this.employer = anEmployer;
         this.skills = someSkills;
@@ -25,27 +30,32 @@ public class Job{
 
     // Getters and setters.
 
-    public String getName() {
-        return name;
-    }
+//    public String getName() {
+//        return name;
+//    }
+//          Remove these?
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmployer() {
+    public Employer getEmployer() {
         return employer;
     }
 
-    public void setEmployer(String employer) {
+    public void setEmployer(Employer employer) {
         this.employer = employer;
     }
 
-    public String getSkills() {
+    public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
+    }
+
+
+    //maybe have to get rid of this
+    public void save(Optional<Employer> employer) {
     }
 }
