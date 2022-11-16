@@ -22,8 +22,8 @@ public class SkillController {
 
     @RequestMapping("")
     public String index (Model model){
-        model.addAttribute("skill", skillRepository.findAll());
-        return "skill/index";
+        model.addAttribute("skills", skillRepository.findAll());
+        return "skills/index";
     }
 
     @GetMapping("add")
@@ -48,8 +48,8 @@ public class SkillController {
 
         Optional optSkill = skillRepository.findById(skillId);
         if (optSkill.isPresent()) {
-            List<Skill> skill = (List<Skill>) optSkill.get();
-            model.addAttribute("skill", skillRepository.findAll());
+            Skill skill = (Skill) optSkill.get();
+            model.addAttribute("skill", skill);
             return "skills/view";
         } else {
             return "redirect:../";

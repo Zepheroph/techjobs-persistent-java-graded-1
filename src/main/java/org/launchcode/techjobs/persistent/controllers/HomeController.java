@@ -37,7 +37,7 @@ public class HomeController {
     @RequestMapping("")
     public String index(Model model) {
 
-        model.addAttribute("title", "My Jobs");
+        //model.addAttribute("title", "My Jobs");
         model.addAttribute("jobs", jobRepository.findAll());
 
         return "index";
@@ -60,23 +60,24 @@ public class HomeController {
 
         // add some code to select the employer object that is affiliated with the new job
         // i will need to use the @requestparam to select the  employer
-
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
-
-            Optional<Employer> employer = employerRepository.findById(employerId);
-                    employerRepository.findById(employerId);
-                        newJob.save(employer);
-                            //maybe delete this save?
-
-                    //above i need to add code that saves this info
-
-            List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
-            newJob.setSkills(skillObjs);
-
-
+            //System.out.println(errors.toString());
             return "add";
         }
+//        Optional<Employer> employer = employerRepository.findById(employerId);
+////                    employerRepository.findById(employerId);
+//                        newJob.setEmployer(employer);
+
+        Employer employer = employerRepository.findById(employerId).orElse(new Employer());
+        newJob.setEmployer(employer);
+
+
+        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+        newJob.setSkills(skillObjs);
+
+
+        jobRepository.save(newJob);
 
         return "redirect:";
     }

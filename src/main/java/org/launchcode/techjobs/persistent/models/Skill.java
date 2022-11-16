@@ -22,6 +22,10 @@ public class Skill extends AbstractEntity {
     @Size(min=10, max=250, message="Your skill needs a  detailed description between 10 and 250 characters long")
     private String description;
 
+    public Skill() {
+
+    }
+
     public String getDescription() {
         return description;
     }

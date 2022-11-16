@@ -14,7 +14,6 @@ public class Job extends AbstractEntity {
 
     // add @ManyToOne to employer
     @ManyToOne
-    @NotNull
     private Employer employer;
     @ManyToMany
     private List<Skill> skills;
@@ -56,6 +55,6 @@ public class Job extends AbstractEntity {
 
 
     //maybe have to get rid of this
-    public void save(Optional<Employer> employer) {
-    }
+//    public void save(Optional<Employer> employer) {
+//    }
 }
